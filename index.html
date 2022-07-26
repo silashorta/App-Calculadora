@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Calculadora</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        #calculadora{
+            padding: 30px;
+            width: 310px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 3px rgb(122, 119, 119);
+            background-color: #2b2a2a;
+        }
+        button{
+            width: 60px;
+            height: 50px;
+            padding: 10px;
+            margin: 4px;
+            box-shadow: 2px 2px 5px black;
+        }
+        .igual{
+            height: 110px;
+        }
+        .clear{
+            width: 130px;
+        }
+        .zero{
+            width: 130px;
+        }
+    </style>
+</head>
+<body>
+    <main class="mx-auto mt-3">
+        <div class="row">
+            <div id="calculadora" class="w-sm-100 h-sm-100 mx-auto">
+                <input type="text" id="visor" class="row w-100 mx-auto bg-light m-3 form-control text-right" placeholder="0" disabled style="font-size: 25px">
+                <div class="row">
+                    <button type="button" onclick="calcularValor('acao', 'c')" id="c" class="btn btn-lg btn-dark clear">C</button>
+                    <button type="button" onclick="calcularValor('acao', '/')" id="/" class="btn btn-lg btn-dark">/</button>
+                    <button type="button" onclick="calcularValor('acao', '*')" id="*" class="btn btn-lg btn-dark">*</button>
+                </div>
+                <div class="row">
+                    <button type="button" onclick="calcularValor('valor', 7)" id="7" class="btn btn-lg btn-dark">7</button>
+                    <button type="button" onclick="calcularValor('valor', 8)" id="8" class="btn btn-lg btn-dark">8</button>
+                    <button type="button" onclick="calcularValor('valor', 9)" id="9" class="btn btn-lg btn-dark">9</button>
+                    <button type="button" onclick="calcularValor('acao', '-')" id="-" class="btn btn-lg btn-dark">-</button>
+                </div>
+                <div class="row">
+                    <button type="button" onkeyup=""  onclick="calcularValor('valor', 4)" id="4" class="btn btn-lg btn-dark">4</button>
+                    <button type="button" onclick="calcularValor('valor', 5)" id="5" class="btn btn-lg btn-dark">5</button>
+                    <button type="button" onclick="calcularValor('valor', 6)" id="6" class="btn btn-lg btn-dark">6</button>
+                    <button type="button" onclick="calcularValor('acao', '+')" id="+" class="btn btn-lg btn-dark">+</button>
+                </div>
+                <div class="row">
+                    <button type="button" onclick="calcularValor('valor', 1)" id="1" class="btn btn-lg btn-dark">1</button>
+                    <button type="button" onclick="calcularValor('valor', 2)" id="2" class="btn btn-lg btn-dark">2</button>
+                    <button type="button" onclick="calcularValor('valor', 3)" id="3" class="btn btn-lg btn-dark">3</button>
+                    <button type="button" onclick="calcularValor('acao', '=')" id="=" class="btn btn-lg btn-dark igual">=</button>
+                </div>
+                <div class="row" style="margin-top: -60px">
+                    <button type="button" onclick="calcularValor('valor', 0)" id="0" class="btn btn-lg btn-dark zero">0</button>
+                    <button type="button" onclick="calcularValor('acao', '.')" id="." class="btn btn-lg btn-dark">.</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+<script>
+    function calcularValor(tipo, valor){
+        //PEGA O VALOR E IMPRIME NO VISOR
+        if (tipo === "acao") {
+            if (valor === "c"){
+                document.getElementById('visor').value = ""
+            }
+            if (valor === "+" || valor === "-" || valor === "/" || valor === "*" || valor === "."){
+                document.getElementById('visor').value += valor
+            }
+            if (valor === "=") {
+                var resultadoFinal = eval(document.getElementById('visor').value)
+                document.getElementById('visor').value = resultadoFinal
+                }
+        } else if (tipo === "valor") {
+            document.getElementById('visor').value += valor
+        }
+
+        //EVENTOS DE TECLADO
+
+        document.addEventListener("keypress", function(valor) {
+            if(valor.key === 'c') {
+                var btn = document.querySelector("#c");
+                btn.click();
+                }
+            if(valor.key === ','){
+                var btn = document.getElementById('.')
+                btn.click(valor)
+            }
+});
+
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>
